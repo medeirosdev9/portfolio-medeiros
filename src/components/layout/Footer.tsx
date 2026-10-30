@@ -1,0 +1,65 @@
+import { cacheLife } from "next/cache";
+import Link from "next/link";
+import { Container } from "@/components/ui/Container";
+import { site, socialLinks } from "@/content/site";
+
+// Com Cache Components, a data precisa ficar em um trecho cacheado.
+async function CurrentYear() {
+  "use cache";
+  cacheLife("days");
+
+  return new Date().getFullYear();
+}
+
+const linkStyles =
+  "text-sm tracking-wide text-muted transition-colors duration-300 hover:text-foreground";
+
+export function Footer() {
+  return (
+    <footer className="border-t border-border">
+      <Container className="py-16 md:py-20">
+        <div className="flex flex-col gap-12 md:flex-row md:items-end md:justify-between">
+          <div>
+            <p className="font-display text-3xl font-semibold tracking-tight sm:text-4xl">
+              {site.name}
+              <span className="text-accent">.</span>
+            </p>
+            <p className="mt-3 text-sm tracking-wide text-muted">{site.role}</p>
+          </div>
+
+          <nav aria-label="Rodapé">
+            <ul className="flex flex-col gap-4 md:flex-row md:gap-10">
+              {socialLinks.map(({ label, url }) => (
+                <li key={label}>
+                  {url ? (
+                    <a
+                      href={url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={linkStyles}
+                    >
+                      {label}
+                    </a>
+                  ) : (
+                    <span className="text-sm tracking-wide text-muted">
+                      {label} <span className="text-xs">(link pendente)</span>
+                    </span>
+                  )}
+                </li>
+              ))}
+              <li>
+                <Link href="/#contato" className={linkStyles}>
+                  Contato
+                </Link>
+              </li>
+            </ul>
+          </nav>
+        </div>
+
+        <p className="mt-16 text-xs tracking-wide text-muted">
+          © <CurrentYear /> {site.name}. Todos os direitos reservados.
+        </p>
+      </Container>
+    </footer>
+  );
+}
