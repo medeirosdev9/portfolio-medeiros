@@ -36,18 +36,27 @@ const pressGesture = {
   transition: { duration: 0.2, ease: "easeOut" },
 } as const;
 
-const iconVariants: Variants = {
-  rest: { x: 0, y: 0 },
-  hover: { x: 2, y: 2 },
+const iconVariants = {
+  "down-right": { rest: { x: 0, y: 0 }, hover: { x: 2, y: 2 } },
+  "up-right": { rest: { x: 0, y: 0 }, hover: { x: 2, y: -2 } },
+  right: { rest: { x: 0 }, hover: { x: 3 } },
+} satisfies Record<string, Variants>;
+
+type ButtonIconProps = {
+  children: ReactNode;
+  direction?: keyof typeof iconVariants;
 };
 
 // Ícone que acompanha o hover do Button. O `!important` do `motion-reduce` vence
 // o transform inline do Motion, que mesmo sem animar aplicaria o valor final.
-export function ButtonIcon({ children }: { children: ReactNode }) {
+export function ButtonIcon({
+  children,
+  direction = "down-right",
+}: ButtonIconProps) {
   return (
     <motion.span
       className="inline-flex motion-reduce:transform-none!"
-      variants={iconVariants}
+      variants={iconVariants[direction]}
     >
       {children}
     </motion.span>
