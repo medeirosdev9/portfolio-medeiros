@@ -1,5 +1,9 @@
+import { About } from "@/components/sections/About";
+import { Experience } from "@/components/sections/Experience";
 import { Hero } from "@/components/sections/Hero";
 import { Projects } from "@/components/sections/Projects";
+import { Services } from "@/components/sections/Services";
+import { Technologies } from "@/components/sections/Technologies";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
@@ -32,22 +36,14 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <PlannedSection
-        id="sobre"
-        eyebrow="01 — Sobre"
-        title="Sobre"
-        stage="a definir"
-      />
-      <PlannedSection
-        id="experiencia"
-        eyebrow="02 — Experiência"
-        title="Experiência"
-        stage="Etapa 5"
-      />
+      <About />
+      <Experience />
       <Projects />
+      <Technologies />
+      <Services />
       <PlannedSection
         id="contato"
-        eyebrow="04 — Contato"
+        eyebrow="06 — Contato"
         title="Contato"
         stage="Etapa 6"
       />
