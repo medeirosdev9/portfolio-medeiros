@@ -95,7 +95,7 @@ export default async function ProjectPage({
             <ProjectCapture
               image={project.cover}
               sizes="(min-width: 1152px) 1072px, 100vw"
-              preload
+              fetchPriority="high"
             />
           </BrowserFrame>
         </Reveal>

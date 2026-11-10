@@ -1,4 +1,5 @@
 import Image from "next/image";
+import type { ComponentProps } from "react";
 import type { ProjectImage } from "@/content/projects";
 import { cn } from "@/lib/cn";
 
@@ -10,14 +11,18 @@ const dimensions = {
 type ProjectCaptureProps = {
   image: ProjectImage;
   sizes: string;
-  preload?: boolean;
+  // "high" só na imagem principal da página (LCP). A documentação do Next 16
+  // recomenda fetchPriority em vez de `preload`; os dois não se combinam.
+  // Com "high", o carregamento também passa a ser imediato (eager): o padrão
+  // do next/image é lazy, que adiaria a imagem principal até o layout.
+  fetchPriority?: ComponentProps<typeof Image>["fetchPriority"];
   className?: string;
 };
 
 export function ProjectCapture({
   image,
   sizes,
-  preload,
+  fetchPriority,
   className,
 }: ProjectCaptureProps) {
   return (
@@ -25,7 +30,8 @@ export function ProjectCapture({
       src={image.src}
       alt={image.alt}
       sizes={sizes}
-      preload={preload}
+      fetchPriority={fetchPriority}
+      loading={fetchPriority === "high" ? "eager" : undefined}
       className={cn("h-auto w-full", className)}
       {...dimensions[image.device]}
     />
