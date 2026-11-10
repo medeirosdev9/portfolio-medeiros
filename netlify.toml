@@ -1,0 +1,13 @@
+# Configuração de deploy na Netlify.
+#
+# A Netlify detecta o Next.js e instala o adaptador oficial (OpenNext)
+# automaticamente. Ele não é fixado aqui, para receber atualizações.
+# A versão do Node vem do arquivo .nvmrc (Node 24).
+#
+# SITE_URL NÃO fica neste arquivo: configure-a no painel da Netlify
+# (Project configuration > Environment variables), somente no contexto
+# "Production". Veja o README.
+
+[build]
+  command = "npm run build"
+  publish = ".next"
