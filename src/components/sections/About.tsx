@@ -1,3 +1,4 @@
+import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { about } from "@/content/about";
@@ -9,7 +10,7 @@ export function About() {
   return (
     <SectionWrapper id="sobre" aria-labelledby="sobre-titulo">
       <Reveal>
-        <p className="text-sm tracking-wide text-accent">01 — Sobre</p>
+        <Eyebrow>01 — Sobre</Eyebrow>
         <h2
           id="sobre-titulo"
           className="mt-8 max-w-5xl font-display text-4xl leading-[1.1] font-semibold tracking-tight text-balance sm:text-5xl lg:text-7xl"

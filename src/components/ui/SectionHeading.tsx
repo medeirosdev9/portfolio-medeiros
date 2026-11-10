@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { Eyebrow } from "@/components/ui/Eyebrow";
 import { cn } from "@/lib/cn";
 
 type SectionHeadingProps = {
@@ -23,7 +24,7 @@ export function SectionHeading({
         className,
       )}
     >
-      <p className="text-sm tracking-wide text-accent md:pt-3">{eyebrow}</p>
+      <Eyebrow className="self-start md:pt-3">{eyebrow}</Eyebrow>
       <div>
         <h2
           id={id}

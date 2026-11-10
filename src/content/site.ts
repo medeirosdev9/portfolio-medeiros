@@ -1,3 +1,5 @@
+import type { BrandLogoName } from "@/components/icons/brands/logos";
+
 export const site = {
   name: "Gabriel Medeiros",
   role: "Software Developer",
@@ -22,6 +24,7 @@ export type SocialLink = {
   url: string | null;
   // Exibido na seção Contato ao lado do nome da rede.
   handle?: string;
+  icon?: BrandLogoName;
 };
 
 // Com `url: null`, o rodapé mostra o item como "link pendente" e a seção
@@ -31,10 +34,12 @@ export const socialLinks: SocialLink[] = [
     label: "GitHub",
     url: "https://github.com/medeirosdev9",
     handle: "medeirosdev9",
+    icon: "github",
   },
   {
     label: "LinkedIn",
     url: "https://www.linkedin.com/in/gabriel-leite-medeiros-211b53354/",
     handle: "gabriel-leite-medeiros",
+    icon: "linkedin",
   },
 ];

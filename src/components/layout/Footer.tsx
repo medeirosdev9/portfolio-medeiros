@@ -1,5 +1,6 @@
 import { cacheLife } from "next/cache";
 import Link from "next/link";
+import { BrandLogo } from "@/components/icons/BrandLogo";
 import { Container } from "@/components/ui/Container";
 import { site, socialLinks } from "@/content/site";
 
@@ -29,16 +30,20 @@ export function Footer() {
 
           <nav aria-label="Rodapé">
             <ul className="flex flex-col gap-4 md:flex-row md:gap-10">
-              {socialLinks.map(({ label, url }) => (
+              {socialLinks.map(({ label, url, icon }) => (
                 <li key={label}>
                   {url ? (
                     <a
                       href={url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={linkStyles}
+                      className={`${linkStyles} inline-flex items-center gap-2.5`}
                     >
+                      {icon && (
+                        <BrandLogo name={icon} className="size-4 shrink-0" />
+                      )}
                       {label}
+                      <span className="sr-only">(abre em nova aba)</span>
                     </a>
                   ) : (
                     <span className="text-sm tracking-wide text-muted">

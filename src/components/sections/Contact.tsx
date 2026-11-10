@@ -1,5 +1,7 @@
 import { ArrowUpRight } from "lucide-react";
+import { BrandLogo } from "@/components/icons/BrandLogo";
 import { Button, ButtonIcon } from "@/components/ui/Button";
+import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { contact } from "@/content/contact";
@@ -16,7 +18,7 @@ export function Contact() {
   return (
     <SectionWrapper id="contato" aria-labelledby="contato-titulo">
       <Reveal>
-        <p className="text-sm tracking-wide text-accent">06 — Contato</p>
+        <Eyebrow>06 — Contato</Eyebrow>
         <h2
           id="contato-titulo"
           className="mt-8 max-w-5xl font-display text-4xl leading-[1.1] font-semibold tracking-tight text-balance sm:text-5xl lg:text-7xl"
@@ -37,6 +39,7 @@ export function Contact() {
             rel="noopener noreferrer"
             className="mt-10 w-full sm:w-auto"
           >
+            <BrandLogo name="whatsapp" className="size-[18px]" />
             {contact.whatsapp.label}
             <span className="sr-only">(abre em nova aba)</span>
             <ButtonIcon direction="up-right">
@@ -55,7 +58,7 @@ export function Contact() {
             {contact.channelsTitle}
           </h3>
           <ul className="border-t border-border md:border-t-0">
-            {channels.map(({ label, url, handle }) => (
+            {channels.map(({ label, url, handle, icon }) => (
               <li key={label}>
                 <a
                   href={url}
@@ -63,8 +66,11 @@ export function Contact() {
                   rel="noopener noreferrer"
                   className="group flex items-center justify-between gap-6 border-b border-border py-6 transition-colors duration-300 hover:border-accent"
                 >
-                  <span className="flex min-w-0 flex-1 flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
-                    <span className="font-display text-2xl font-semibold tracking-tight text-muted transition-colors duration-300 group-hover:text-foreground sm:text-3xl">
+                  <span className="flex min-w-0 flex-1 flex-col gap-1 sm:flex-row sm:items-center sm:justify-between sm:gap-6">
+                    <span className="flex items-center gap-4 font-display text-2xl font-semibold tracking-tight text-muted transition-colors duration-300 group-hover:text-foreground sm:text-3xl">
+                      {icon && (
+                        <BrandLogo name={icon} className="size-6 shrink-0" />
+                      )}
                       {label}
                     </span>
                     {handle && (
