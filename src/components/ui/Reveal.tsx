@@ -8,6 +8,9 @@ type RevealProps = {
   children: ReactNode;
   className?: string;
   delay?: number;
+  // `false` anima só o deslocamento: o conteúdo é visível desde o primeiro
+  // quadro. Use no elemento principal da página (LCP), como o h1 do Hero.
+  fade?: boolean;
 };
 
 // Com movimento reduzido, o MotionConfig mantém só o fade e remove o deslocamento.
@@ -16,6 +19,7 @@ export function Reveal({
   children,
   className,
   delay = 0,
+  fade = true,
 }: RevealProps) {
   const Element = motion[as];
 
@@ -24,7 +28,7 @@ export function Reveal({
       <Element
         data-reveal
         className={className}
-        initial={{ opacity: 0, y: 16 }}
+        initial={{ opacity: fade ? 0 : 1, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
         transition={{ duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] }}

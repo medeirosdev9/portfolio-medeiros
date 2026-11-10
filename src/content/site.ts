@@ -11,11 +11,14 @@ export type NavLink = {
 };
 
 // Âncoras com "/" funcionam também fora da home, como na página 404.
+// A ordem segue a numeração das seções: Início é 00, Sobre 01... Contato 06.
 export const navLinks: NavLink[] = [
   { label: "Início", href: "/#inicio" },
   { label: "Sobre", href: "/#sobre" },
   { label: "Experiência", href: "/#experiencia" },
   { label: "Projetos", href: "/#projetos" },
+  { label: "Tecnologias", href: "/#tecnologias" },
+  { label: "Serviços", href: "/#servicos" },
   { label: "Contato", href: "/#contato" },
 ];
 

@@ -2,6 +2,7 @@ export type Experience = {
   title: string;
   label?: string;
   isCurrent: boolean;
+  icon: "briefcase" | "code";
   activities: string[];
 };
 
@@ -12,6 +13,7 @@ export const experiences: Experience[] = [
     title: "Desenvolvimento de Software",
     label: "Atuação profissional atual",
     isCurrent: true,
+    icon: "briefcase",
     activities: [
       "Desenvolvimento e manutenção de aplicações corporativas",
       "Automação de processos e fluxos de trabalho",
@@ -24,6 +26,7 @@ export const experiences: Experience[] = [
   {
     title: "Desenvolvimento Web Independente",
     isCurrent: false,
+    icon: "code",
     activities: [
       "Criação de landing pages",
       "Desenvolvimento de sites institucionais",

@@ -1,7 +1,14 @@
+import { Cpu, GraduationCap, type LucideIcon } from "lucide-react";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
-import { about } from "@/content/about";
+import { type Education, about } from "@/content/about";
+import { cn } from "@/lib/cn";
+
+const educationIcons: Record<Education["icon"], LucideIcon> = {
+  "graduation-cap": GraduationCap,
+  cpu: Cpu,
+};
 
 const gridStyles =
   "grid gap-6 md:grid-cols-[minmax(0,1fr)_minmax(0,3fr)] md:gap-10";
@@ -29,14 +36,44 @@ export function About() {
         delay={0.15}
         className={`${gridStyles} mt-16 border-t border-border pt-8 md:mt-24`}
       >
-        <h3 className="text-sm tracking-wide text-muted">Formação</h3>
-        <ul className="space-y-4 text-sm leading-6 tracking-wide">
-          {about.education.map(({ title, detail }) => (
-            <li key={title}>
-              {title}
-              <span className="block text-muted">{detail}</span>
-            </li>
-          ))}
+        <h3 className="text-sm tracking-wide text-muted md:pt-1">Formação</h3>
+        <ul className="grid gap-2 sm:grid-cols-2">
+          {about.education.map(({ title, detail, status, icon }) => {
+            const Icon = educationIcons[icon];
+
+            return (
+              <li
+                key={title}
+                className={cn(
+                  "relative border bg-surface p-6",
+                  status ? "border-accent/30" : "border-border",
+                )}
+              >
+                <span
+                  className={cn(
+                    "flex size-11 items-center justify-center border",
+                    status
+                      ? "border-accent/45 text-accent"
+                      : "border-border text-muted",
+                  )}
+                >
+                  <Icon aria-hidden className="size-[22px]" strokeWidth={1.5} />
+                </span>
+                {status && (
+                  <span className="absolute top-6 right-6 flex items-center gap-2 text-xs tracking-wide text-accent">
+                    <span aria-hidden className="size-1.5 rounded-full bg-accent" />
+                    {status}
+                  </span>
+                )}
+                <p className="mt-8 font-display text-xl leading-tight font-semibold tracking-tight">
+                  {title}
+                </p>
+                <p className="mt-2 text-sm leading-6 tracking-wide text-muted">
+                  {detail}
+                </p>
+              </li>
+            );
+          })}
         </ul>
       </Reveal>
     </SectionWrapper>
