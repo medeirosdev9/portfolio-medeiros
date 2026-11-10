@@ -2,13 +2,20 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { BrowserFrame } from "@/components/projects/BrowserFrame";
 import { ConceptNotice } from "@/components/projects/ConceptNotice";
+import { PhoneFrame } from "@/components/projects/PhoneFrame";
 import { ProjectCapture } from "@/components/projects/ProjectCapture";
 import { ProjectLink } from "@/components/projects/ProjectLink";
 import { SitePreview } from "@/components/projects/SitePreview";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
-import { getNextProject, getProject, projects } from "@/content/projects";
+import {
+  getFrameLabel,
+  getNextProject,
+  getProject,
+  projects,
+} from "@/content/projects";
 import { site } from "@/content/site";
 import { baseOpenGraph } from "@/lib/metadata";
 
@@ -53,6 +60,7 @@ export default async function ProjectPage({
   if (!project) notFound();
 
   const nextProject = getNextProject(project.slug);
+  const frameLabel = getFrameLabel(project);
   const desktopImages = project.gallery.filter(
     (image) => image.device === "desktop",
   );
@@ -82,13 +90,13 @@ export default async function ProjectPage({
         </Reveal>
 
         <Reveal delay={0.15} className="mt-12 md:mt-16">
-          <div className="border border-border">
+          <BrowserFrame label={frameLabel}>
             <ProjectCapture
               image={project.cover}
               sizes="(min-width: 1152px) 1072px, 100vw"
               preload
             />
-          </div>
+          </BrowserFrame>
         </Reveal>
 
         <div className={`${gridStyles} mt-16 md:mt-24`}>
@@ -154,23 +162,23 @@ export default async function ProjectPage({
           <div className="mt-8 space-y-8">
             {desktopImages.map((image) => (
               <Reveal key={image.src}>
-                <div className="border border-border">
+                <BrowserFrame label={frameLabel}>
                   <ProjectCapture
                     image={image}
                     sizes="(min-width: 1152px) 1072px, 100vw"
                   />
-                </div>
+                </BrowserFrame>
               </Reveal>
             ))}
             <div className="grid grid-cols-2 gap-4 sm:gap-8 md:ml-auto md:w-3/4">
               {mobileImages.map((image) => (
                 <Reveal key={image.src}>
-                  <div className="border border-border">
+                  <PhoneFrame>
                     <ProjectCapture
                       image={image}
                       sizes="(min-width: 768px) 400px, 50vw"
                     />
-                  </div>
+                  </PhoneFrame>
                 </Reveal>
               ))}
             </div>

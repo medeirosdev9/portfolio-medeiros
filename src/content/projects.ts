@@ -12,6 +12,8 @@ export type Project = {
   context: string;
   objective: string;
   features: string[];
+  // Versões curtas de `features`, exibidas como etiquetas no card da home.
+  highlights: string[];
   cover: ProjectImage;
   gallery: ProjectImage[];
   // Conceitos independentes exibem o aviso `conceptNotice`.
@@ -26,6 +28,19 @@ export type Project = {
 
 const clientCategory = "Projeto para cliente";
 const conceptCategory = "Estudo de caso / Conceito de site";
+
+export const projectBadges = {
+  client: "Projeto para cliente",
+  concept: "Conceito independente",
+};
+
+// Texto da barra de endereço das molduras. Conceitos nunca mostram domínio,
+// para não sugerir um site real.
+export function getFrameLabel(project: Project) {
+  return project.url
+    ? new URL(project.url).hostname.replace(/^www\./, "")
+    : "conceito — site fictício";
+}
 
 export const conceptNotice =
   "Conceito independente, desenvolvido por iniciativa própria. Não é um site oficial e não foi contratado nem aprovado por nenhuma empresa. Nome, marca e conteúdo exibidos nas imagens são fictícios.";
@@ -49,6 +64,7 @@ export const projects: Project[] = [
       "Localização com link para o Google Maps",
       "Agendamento pelo WhatsApp",
     ],
+    highlights: ["Galeria com filtros", "Horários", "FAQ", "WhatsApp"],
     cover: {
       src: "/projects/arena-futmais/cover.webp",
       alt: "Seção de apresentação do site da Arena Futmais, com a foto da fachada.",
@@ -96,6 +112,7 @@ export const projects: Project[] = [
       "Consulta de produto pelo WhatsApp",
       "Navegação por seções em uma única página",
     ],
+    highlights: ["Categorias", "Vitrine com filtros", "WhatsApp"],
     cover: {
       src: "/projects/conceito-loja/cover.webp",
       alt: "Abertura do conceito de site para loja de materiais, com a marca fictícia Loja Modelo.",
@@ -141,6 +158,7 @@ export const projects: Project[] = [
       "Seção de documentação técnica (PMOC e Laudo TRT)",
       "Pedido de orçamento pelo WhatsApp",
     ],
+    highlights: ["Dez serviços", "Documentação técnica", "Orçamento pelo WhatsApp"],
     cover: {
       src: "/projects/conceito-climatizacao/cover.webp",
       alt: "Abertura do conceito de site para climatização e refrigeração, com a marca fictícia Modelo.",
