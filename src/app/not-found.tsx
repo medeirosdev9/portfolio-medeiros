@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
-import { site } from "@/content/site";
 
+// O template do layout completa o título com " | <nome>". `robots` substitui
+// o do layout (index em produção), que contradiria o noindex da 404.
 export const metadata: Metadata = {
-  title: `Página não encontrada | ${site.name}`,
+  title: "Página não encontrada",
+  robots: { index: false, follow: true },
 };
 
 export default function NotFound() {

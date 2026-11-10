@@ -87,7 +87,8 @@ export function Navbar() {
             type="button"
             aria-label={isOpen ? "Fechar menu" : "Abrir menu"}
             aria-expanded={isOpen}
-            aria-controls={MOBILE_MENU_ID}
+            // O menu só existe no DOM quando aberto: a referência acompanha.
+            aria-controls={isOpen ? MOBILE_MENU_ID : undefined}
             className="-mr-3 flex size-12 items-center justify-center lg:hidden"
             onClick={() => setIsOpen((open) => !open)}
           >

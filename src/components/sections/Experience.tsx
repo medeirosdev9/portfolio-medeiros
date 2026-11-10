@@ -55,7 +55,7 @@ export function Experience() {
                       {label}
                     </p>
                   )}
-                  <ul className="mt-6 grid gap-x-10 gap-y-3 border border-border bg-surface p-5 leading-7 text-muted sm:grid-cols-2 sm:p-6 md:p-8">
+                  <ul className="mt-6 grid gap-x-10 gap-y-3 border border-border bg-surface p-5 leading-7 text-muted sm:p-6 md:p-8 lg:grid-cols-2">
                     {activities.map((activity) => (
                       <li
                         key={activity}

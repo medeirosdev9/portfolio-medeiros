@@ -34,7 +34,9 @@ export function Hero() {
           </Reveal>
         </h1>
 
-        <Reveal delay={0.25}>
+        {/* fade={false}: no celular, a descrição é o maior elemento da tela
+            (LCP) e precisa estar visível já no HTML inicial. */}
+        <Reveal fade={false} delay={0.25}>
           <div className="relative grid gap-8 border-t border-border pt-8 md:grid-cols-[minmax(0,1fr)_minmax(0,3fr)] md:gap-10">
             {/* Linha laranja desenhada sobre a divisória, na largura da 1ª coluna. */}
             <span

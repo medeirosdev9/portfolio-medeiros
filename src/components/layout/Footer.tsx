@@ -1,3 +1,4 @@
+import { MessageCircle } from "lucide-react";
 import { cacheLife } from "next/cache";
 import Link from "next/link";
 import { BrandLogo } from "@/components/icons/BrandLogo";
@@ -12,8 +13,10 @@ async function CurrentYear() {
   return new Date().getFullYear();
 }
 
+// py-2: área de toque de 36px de altura. O espaçamento visual entre os links
+// continua o mesmo, porque a lista não tem mais `gap` vertical.
 const linkStyles =
-  "text-sm tracking-wide text-muted transition-colors duration-300 hover:text-foreground";
+  "inline-flex items-center gap-2.5 py-2 text-sm tracking-wide text-muted transition-colors duration-300 hover:text-foreground";
 
 export function Footer() {
   return (
@@ -29,7 +32,9 @@ export function Footer() {
           </div>
 
           <nav aria-label="Rodapé">
-            <ul className="flex flex-col gap-4 md:flex-row md:gap-10">
+            {/* md:-mb-2 compensa o py-2 para alinhar a base do texto com o
+                cargo ao lado. */}
+            <ul className="flex flex-col md:-mb-2 md:flex-row md:gap-10">
               {socialLinks.map(({ label, url, icon }) => (
                 <li key={label}>
                   {url ? (
@@ -37,7 +42,7 @@ export function Footer() {
                       href={url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={`${linkStyles} inline-flex items-center gap-2.5`}
+                      className={linkStyles}
                     >
                       {icon && (
                         <BrandLogo name={icon} className="size-4 shrink-0" />
@@ -54,6 +59,11 @@ export function Footer() {
               ))}
               <li>
                 <Link href="/#contato" className={linkStyles}>
+                  <MessageCircle
+                    aria-hidden
+                    className="size-4 shrink-0"
+                    strokeWidth={1.5}
+                  />
                   Contato
                 </Link>
               </li>

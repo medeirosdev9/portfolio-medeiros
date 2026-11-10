@@ -39,13 +39,21 @@ export function ProjectFeature({ project, index }: ProjectFeatureProps) {
       <Reveal className={cn(isReversed && "lg:order-2")}>
         {/* A partir de 640px, a margem lateral (18%) recebe o celular, que
             cobre só uma faixa estreita da borda da captura desktop. */}
-        <Link
-          href={href}
+        <div
           className={cn(
-            "relative block sm:pb-14",
+            "relative sm:pb-14",
             isReversed ? "sm:pl-[18%]" : "sm:pr-[18%]",
           )}
         >
+          {/* Atalho de clique para mouse e toque. Fica fora do Tab e dos
+              leitores de tela, que usam o título e "Ver detalhes"; a capa
+              continua acessível pelo texto alternativo. */}
+          <Link
+            href={href}
+            tabIndex={-1}
+            aria-hidden
+            className="absolute inset-0 z-10"
+          />
           <BrowserFrame
             label={getFrameLabel(project)}
             className={cn(lift, "group-hover:-translate-y-1 group-hover:border-accent/45")}
@@ -71,10 +79,15 @@ export function ProjectFeature({ project, index }: ProjectFeatureProps) {
               />
             </PhoneFrame>
           )}
-        </Link>
+        </div>
       </Reveal>
 
-      <Reveal delay={0.1} className={cn(isReversed && "lg:order-1")}>
+      {/* max-w-2xl: com a coluna ocupando toda a largura (abaixo de 1024px),
+          limita o comprimento das linhas de texto. */}
+      <Reveal
+        delay={0.1}
+        className={cn("max-w-2xl lg:max-w-none", isReversed && "lg:order-1")}
+      >
         <p
           aria-hidden
           className="font-display text-7xl leading-[0.8] font-bold tracking-tighter text-transparent tabular-nums transition-[-webkit-text-stroke-color] duration-500 [-webkit-text-stroke:1px_#3a3a3a] group-hover:[-webkit-text-stroke-color:var(--color-accent)] sm:text-8xl"

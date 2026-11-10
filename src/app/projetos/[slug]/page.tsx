@@ -89,7 +89,8 @@ export default async function ProjectPage({
           {project.isConcept && <ConceptNotice className="mt-8 max-w-2xl" />}
         </Reveal>
 
-        <Reveal delay={0.15} className="mt-12 md:mt-16">
+        {/* fade={false}: a capa é o maior elemento da página (LCP). */}
+        <Reveal fade={false} delay={0.15} className="mt-12 md:mt-16">
           <BrowserFrame label={frameLabel}>
             <ProjectCapture
               image={project.cover}
