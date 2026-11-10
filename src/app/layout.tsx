@@ -3,6 +3,8 @@ import { Bricolage_Grotesque, Inter } from "next/font/google";
 import { Footer } from "@/components/layout/Footer";
 import { Navbar } from "@/components/layout/Navbar";
 import { site } from "@/content/site";
+import { baseOpenGraph, siteDescription, siteTitle } from "@/lib/metadata";
+import { isIndexable, siteUrl } from "@/lib/site-url";
 import "./globals.css";
 
 const inter = Inter({
@@ -16,8 +18,26 @@ const bricolage = Bricolage_Grotesque({
 });
 
 export const metadata: Metadata = {
-  title: `${site.name} | ${site.role}`,
-  description: `Portfólio de ${site.name}: projetos, experiência profissional e serviços como desenvolvedor de software.`,
+  metadataBase: siteUrl,
+  title: {
+    default: siteTitle,
+    template: `%s | ${site.name}`,
+  },
+  description: siteDescription,
+  authors: [{ name: site.name }],
+  creator: site.name,
+  openGraph: {
+    ...baseOpenGraph,
+    title: siteTitle,
+    description: siteDescription,
+  },
+  twitter: {
+    card: "summary_large_image",
+  },
+  // Local, preview e produção sem domínio definitivo não são indexados.
+  robots: isIndexable
+    ? { index: true, follow: true }
+    : { index: false, follow: false },
 };
 
 export const viewport: Viewport = {

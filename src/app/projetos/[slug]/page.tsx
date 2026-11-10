@@ -10,6 +10,7 @@ import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { getNextProject, getProject, projects } from "@/content/projects";
 import { site } from "@/content/site";
+import { baseOpenGraph } from "@/lib/metadata";
 
 export function generateStaticParams() {
   return projects.map(({ slug }) => ({ slug }));
@@ -22,12 +23,20 @@ export async function generateMetadata({
 
   if (!project) return {};
 
-  const title = `${project.title} | ${site.name}`;
+  const path = `/projetos/${project.slug}`;
 
+  // O título da aba recebe " | <nome>" pelo template do layout.
   return {
-    title,
+    title: project.title,
     description: project.summary,
-    openGraph: { title, description: project.summary, type: "article" },
+    alternates: { canonical: path },
+    openGraph: {
+      ...baseOpenGraph,
+      type: "article",
+      title: `${project.title} | ${site.name}`,
+      description: project.summary,
+      url: path,
+    },
   };
 }
 

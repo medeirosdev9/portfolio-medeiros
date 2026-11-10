@@ -20,11 +20,21 @@ export const navLinks: NavLink[] = [
 export type SocialLink = {
   label: string;
   url: string | null;
+  // Exibido na seção Contato ao lado do nome da rede.
+  handle?: string;
 };
 
-// PLACEHOLDER: troque `null` pela URL real. Enquanto for `null`, o rodapé
-// mostra o item como "link pendente" em vez de um link quebrado.
+// Com `url: null`, o rodapé mostra o item como "link pendente" e a seção
+// Contato o omite, em vez de exibir um link quebrado.
 export const socialLinks: SocialLink[] = [
-  { label: "GitHub", url: null },
-  { label: "LinkedIn", url: null },
+  {
+    label: "GitHub",
+    url: "https://github.com/medeirosdev9",
+    handle: "medeirosdev9",
+  },
+  {
+    label: "LinkedIn",
+    url: "https://www.linkedin.com/in/gabriel-leite-medeiros-211b53354/",
+    handle: "gabriel-leite-medeiros",
+  },
 ];
